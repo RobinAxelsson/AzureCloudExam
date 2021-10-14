@@ -6,16 +6,18 @@ name: Build and deploy ASP.Net Core app to Azure Web App - WebCalculator111
 on:
   push:
     branches:
-      - deploy
+      - main
   workflow_dispatch:
+env:
+  DOTNET_ROOT: './src/WebCalc'
 jobs:
   build:
-    env:
-      DOTNET_ROOT: ./src/WebCalc
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+        shell: bash
+        run: pwd
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
