@@ -9,7 +9,7 @@ on:
       - main
   workflow_dispatch:
 env:
-  DOTNET_ROOT: '/src/WebCalc'
+  DOTNET_ROOT: '.'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +23,8 @@ jobs:
         with:
           dotnet-version: '3.1.301'
           include-prerelease: true
-
+      - name: Set Working Directory
+        run: cd /src/WebCalc
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
