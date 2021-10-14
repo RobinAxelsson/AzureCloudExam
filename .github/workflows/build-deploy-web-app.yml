@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-web-app:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,9 +38,9 @@ jobs:
           name: .net-app
           path: src/WebCalc/myapp
 
-  deploy:
+  deploy-web-app:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-web-app
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
