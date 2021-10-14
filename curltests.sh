@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [[ "$#" -ne 1 ]]; then
-    echo provide an url.
+if [[ "$#" -ne 2 ]]; then
+    echo "provide: <url> <operation:add|sub>"
     exit 1
 fi
 if [[ $1 == *"?"* ]]; then
@@ -48,11 +48,19 @@ calculateExpect400() {
         echo $(curl -isb "$hostUrl"a=$1\&b=$2)
     fi
 }
-calculateExpectTrue 1 2 3
-calculateExpectTrue 1. 2. 3
-calculateExpectTrue 1.0 2.00 3.00
-calculateExpectTrue 0.1 -2 -1.9
-calculateExpectTrue 0.1 -1000 -999.9
+if [[ $2 == "add" ]]; then
+    calculateExpectTrue 1 2 3
+    calculateExpectTrue 1. 2. 3
+    calculateExpectTrue 1.0 2.00 3.00
+    calculateExpectTrue 0.1 -2 -1.9
+    calculateExpectTrue 0.1 -1000 -999.9
+else
+    calculateExpectTrue 1 2 -1
+    calculateExpectTrue 1. 2. -1
+    calculateExpectTrue 1.0 2.00 -1.00
+    calculateExpectTrue 0.1 -2 2.1
+    calculateExpectTrue 0.1 -1000 1000.1
+fi
 calculateExpect400 "100000000000000000000000000000000000000000000000000000000000000000000000000" "1"
 calculateExpect400 ".1" ".2"
 calculateExpect400 "'" "'"

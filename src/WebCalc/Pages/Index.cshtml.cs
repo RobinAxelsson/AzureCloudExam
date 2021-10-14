@@ -24,7 +24,7 @@ namespace WebCalc.Pages
         {
             _logger.LogInformation("Page was requested.");
             var calcs = await _dbClient.GetAllCalculationsAsync();
-            Answers = calcs.Select(c => c.CalculationString).ToList();
+            Answers = calcs.Count == 0 ? new List<string>() { "No Calculations Made" } : calcs.Select(c => c.CalculationString).ToList();
             return Page();
         }
         public List<string> Answers { get; set; }

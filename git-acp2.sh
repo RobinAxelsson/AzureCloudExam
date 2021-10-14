@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# First add remote
+# git remote add tentadeploy https://github.com/RobinAxelsson/MolnTentaDeploy.git
+
 if [[ $# -ne 1 ]]; then
     echo adds, commits and pushes repo
     echo "one parameter needed: <commit-message>"
