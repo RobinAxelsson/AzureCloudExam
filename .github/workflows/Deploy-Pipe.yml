@@ -91,7 +91,6 @@ jobs:
 
       - name: 'Publish Add Calculator'
         uses: Azure/functions-action@v1
-        id: fa
         with:
           app-name: 'AddCalculator'
           slot-name: 'Production'
