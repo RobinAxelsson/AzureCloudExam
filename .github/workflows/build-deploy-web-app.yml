@@ -15,9 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: echo $DOTNET_ROOT
-      - run: pwd
-      - run: ls
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
