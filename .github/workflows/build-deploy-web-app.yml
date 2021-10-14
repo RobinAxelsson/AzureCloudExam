@@ -9,13 +9,14 @@ on:
       - main
   workflow_dispatch:
 env:
-  DOTNET_ROOT: '.'
+  DOTNET_ROOT: '/'
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - run: echo $DOTNET_ROOT
       - run: pwd
       - run: ls
       - name: Set up .NET Core
