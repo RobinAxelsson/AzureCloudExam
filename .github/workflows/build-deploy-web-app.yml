@@ -9,7 +9,7 @@ on:
       - deploy
   workflow_dispatch:
 env:
-  DOTNET_ROOT: /src/WebCalc
+  DOTNET_ROOT: ./src/WebCalc
 jobs:
   build:
     runs-on: ubuntu-latest
