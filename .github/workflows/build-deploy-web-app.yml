@@ -28,7 +28,9 @@ jobs:
       - name: check
         run: ls
       - name: move
-        run: cd src
+        run: |
+          cd src
+          cd WebCalc
       - name: check
         run: ls
       - name: Set Working Directory
