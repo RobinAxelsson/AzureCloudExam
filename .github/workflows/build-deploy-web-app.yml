@@ -8,8 +8,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-env:
-  DOTNET_ROOT: '/'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,28 +24,21 @@ jobs:
           dotnet-version: '3.1.301'
           include-prerelease: true
 
-      - name: check
-        run: ls
-      - name: move
-        run: |
-          cd src
-          cd WebCalc
-          pwd
-      - name: check
-        run: ls
-      - name: Set Working Directory
-        run: cd /src/WebCalc
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: |
+          cd src/WebCalc
+          dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: |
+          cd src/WebCalc
+          dotnet publish -c Release -o myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: src/WebCalc/myapp
 
   deploy:
     runs-on: ubuntu-latest
