@@ -86,7 +86,7 @@ jobs:
         with:
           app-name: 'FunctionCalculatotSubtract'
           slot-name: 'Production'
-          package: 'src/Calculator/output'
+          package: './output'
 
           #Publish Subtract
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
