@@ -15,3 +15,7 @@
 ## Mockup
 
 ![mock](./mockup.png)
+
+```shell
+git remote add upstream https://github.com/RobinAxelsson/MolnTentaDeploy.git
+```
