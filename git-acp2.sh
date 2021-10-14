@@ -7,4 +7,4 @@ fi
 git add -A
 git commit -m "$1"
 git push
-git push tentadeploy
+git push tentadeploy main

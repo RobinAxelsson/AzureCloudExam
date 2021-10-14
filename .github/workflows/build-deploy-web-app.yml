@@ -8,10 +8,10 @@ on:
     branches:
       - deploy
   workflow_dispatch:
-env:
-  DOTNET_ROOT: ./src/WebCalc
 jobs:
   build:
+    env:
+      DOTNET_ROOT: ./src/WebCalc
     runs-on: ubuntu-latest
 
     steps:
