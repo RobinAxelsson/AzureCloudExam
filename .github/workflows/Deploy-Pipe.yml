@@ -87,9 +87,13 @@ jobs:
           app-name: 'FunctionCalculatotSubtract'
           slot-name: 'Production'
           package: 'src/Calculator/output'
-
-          #Publish Subtract
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
-          
-          #Publish Add
-          #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
+
+      - name: 'Publish Add Calculator'
+        uses: Azure/functions-action@v1
+        id: fa
+        with:
+          app-name: 'AddCalculator'
+          slot-name: 'Production'
+          package: 'src/Calculator/output'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CDA710F4BB524EAC914DEDC66F732837 }}
