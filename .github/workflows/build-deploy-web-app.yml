@@ -8,6 +8,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  
+env:
+  DOTNET_VERSION: '3.1.301'
 
 jobs:
   build-web-app:
@@ -16,11 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up .NET Core
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.301'
-          include-prerelease: true
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build with dotnet
         run: |
@@ -59,3 +61,35 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E6C50C0A65804F0BA14524A20BFA7883 }}
           package: .
+
+  deploy-calculators:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 'Resolve Project Dependencies Using Dotnet'
+        shell: bash
+        run: |
+          pushd './src/Calculator'
+          dotnet build --configuration Release --output ./output
+          popd
+
+      - name: 'Run Azure Functions Action'
+        uses: Azure/functions-action@v1
+        id: fa
+        with:
+          app-name: 'FunctionCalculatotSubtract'
+          slot-name: 'Production'
+          package: 'src/Calculator/output'
+
+          #Publish Subtract
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
+          
+          #Publish Add
+          #publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
