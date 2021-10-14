@@ -26,6 +26,10 @@ jobs:
 
       - name: check
         run: ls
+      - name: move
+        run: cd src
+      - name: check
+        run: ls
       - name: Set Working Directory
         run: cd /src/WebCalc
       - name: Build with dotnet
