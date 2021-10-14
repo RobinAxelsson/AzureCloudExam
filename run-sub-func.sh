@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-path="./src/Calculator2"
+path=temp
+mkdir $path
 cleanup() {
     popd
     unset Operation
@@ -7,7 +8,7 @@ cleanup() {
 }
 
 cp -R src/Calculator $path
-pushd $path
+pushd $path/Calculator
 export Operation=SUBTRACTION
 
 trap cleanup SIGINT
