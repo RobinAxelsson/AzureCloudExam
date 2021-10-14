@@ -11,7 +11,7 @@ on:
   
 env:
   DOTNET_VERSION: '3.1.301'
-
+  WEBAPP_PATH: 'src/WebCalc'
 jobs:
   build-web-app:
     runs-on: ubuntu-latest
@@ -26,19 +26,19 @@ jobs:
 
       - name: Build with dotnet
         run: |
-          cd src/WebCalc
+          cd ${{ env.WEBAPP_PATH }}
           dotnet build --configuration Release
 
       - name: dotnet publish
         run: |
-          cd src/WebCalc
+          cd ${{ env.WEBAPP_PATH }}
           dotnet publish -c Release -o myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: src/WebCalc/myapp
+          path: ${{ env.WEBAPP_PATH }}/myapp
 
   deploy-web-app:
     runs-on: ubuntu-latest
