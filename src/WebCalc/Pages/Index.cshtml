@@ -1,0 +1,22 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Calculator";
+}
+<form method="post">
+    <select id="op" name="op">
+        <option value="0">Addition</option>
+        <option value="1">Subraction</option>
+    </select><br>
+    <label asp-for="a">First number:</label>
+    <input type="text" id="a" name="a" required><br>
+    <label asp-for="b">Second number:</label>
+    <input type="text" id="b" name="b" required>
+    <input type="submit" value="Submit">
+</form>
+<div>
+    @foreach (var answer in Model.Answers)
+    {
+        <p1>@answer</p1><br>
+    }
+</div>
