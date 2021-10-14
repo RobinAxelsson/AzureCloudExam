@@ -14,7 +14,7 @@ env:
   DOTNET_VERSION: '3.1.301' # set this to the dotnet version to use
 
 jobs:
-  build-and-deploy:
+  deploy-calculators:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
@@ -28,7 +28,7 @@ jobs:
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          pushd './src/Calculator'
           dotnet build --configuration Release --output ./output
           popd
 
@@ -38,7 +38,7 @@ jobs:
         with:
           app-name: 'FunctionCalculatotSubtract'
           slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          package: 'src/Calculator/output'
 
           #Publish Subtract
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48023FD56F6D4AD198D95061F77FBD03 }}
