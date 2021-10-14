@@ -1,12 +1,12 @@
 using System;
 using System.Net;
 using System.Web;
-var uriBuilder = new UriBuilder("http://localhost:7071/api/HttpTrigger");
 
 var args = Environment.GetCommandLineArgs();
+var uriBuilder = new UriBuilder(args[2]);
 var parameters = HttpUtility.ParseQueryString(string.Empty);
-parameters["a"] = args[2];
-parameters["b"] = args[3];
+parameters["a"] = args[3];
+parameters["b"] = args[4];
 uriBuilder.Query = parameters.ToString();
 
 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.Uri);
