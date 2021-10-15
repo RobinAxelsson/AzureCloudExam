@@ -23,7 +23,7 @@ namespace WebCalc.Pages
         public async Task<IActionResult> OnGetAsync()
         {
             _logger.LogInformation("Page was requested.");
-            var calcs = await _dbClient.GetAllCalculationsAsync();
+            var calcs = await _dbClient.GetLast10Async();
             Answers = calcs.Count == 0 ? new List<string>() { "No Calculations Made" } : calcs.Select(c => c.CalculationString).ToList();
             return Page();
         }
@@ -50,7 +50,7 @@ namespace WebCalc.Pages
             };
 
             await _dbClient.TryAddCalculation(calculation);
-            var calcs = await _dbClient.GetAllCalculationsAsync();
+            var calcs = await _dbClient.GetLast10Async();
             Answers = calcs.Select(c => c.CalculationString).ToList();
             return Page();
         }

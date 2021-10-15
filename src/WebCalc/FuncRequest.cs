@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -21,16 +19,19 @@ namespace WebCalc
         private IConfiguration _configuration;
         private readonly ILogger<FuncRequest> _logger;
 
-        public async Task<String> Request(string a, string b, string group)
+        public async Task<String> Request(string a, string b, string op)
         {
-            string endpoint = Operation.ADDITION == group ? _configuration["AdditionEndpoint"] : _configuration["SubtractionEndpoint"];
+            string endpoint = Operation.ADDITION == op ? _configuration["AdditionEndpoint"] : _configuration["SubtractionEndpoint"];
             var uriBuilder = new UriBuilder(endpoint);
-            var parameters = HttpUtility.ParseQueryString(string.Empty);
+            var query = uriBuilder.Query;
+
+            var parameters = HttpUtility.ParseQueryString(endpoint.Split('?')[^1]);
             parameters["a"] = a;
             parameters["b"] = b;
             uriBuilder.Query = parameters.ToString();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.Uri);
+            Console.WriteLine(uriBuilder.Uri);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.ToString());
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
             try
