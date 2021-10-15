@@ -14,7 +14,7 @@ env:
   DOTNET_VERSION: '3.1.301'
   WEBAPP_PATH: 'src/WebCalc'
   CALC_PATH: 'src/Calculator'
-  DBCLIENT_PATH: 'src/DbClientTest'
+  WEBCALC_PATH: 'src/WebCalcTest'
 jobs:
 
 ########### WEBAPP ############
@@ -83,16 +83,16 @@ jobs:
 
       - name: Build with dotnet
         run: |
-          cd ${{ env.DBCLIENT_PATH }}
+          cd ${{ env.WEBCALC_PATH }}
           dotnet build --configuration Release
 
       - name: dotnet publish
         run: |
-          cd ${{ env.DBCLIENT_PATH }}
+          cd ${{ env.WEBCALC_PATH }}
           dotnet publish -c Release -o myapp
 
       - name: Run test app
-        run: dotnet ${{ env.DBCLIENT_PATH }}/myapp/DbClientTest.dll ${{ secrets.ACCOUNTKEY }} ${{ secrets.ACCOUNTENDPOINT }} ${{ secrets.CMD_ADDITIONENDPOINT }} ${{ secrets.CMD_SUBTRACTIONENDPOINT }}
+        run: dotnet ${{ env.WEBCALC_PATH }}/myapp/WebCalcTest.dll ${{ secrets.ACCOUNTKEY }} ${{ secrets.ACCOUNTENDPOINT }} ${{ secrets.CMD_ADDITIONENDPOINT }} ${{ secrets.CMD_SUBTRACTIONENDPOINT }}
 
 
 ############ FUNCTION APPS BUILD DEPLOY ################

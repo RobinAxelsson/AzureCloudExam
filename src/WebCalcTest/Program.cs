@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using WebCalc;
 using Microsoft.Extensions.Configuration;
 
-namespace DbClientTest
+namespace WebCalcTest
 {
     class Program
     {

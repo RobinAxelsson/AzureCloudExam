@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 //https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-get-started#next-steps
 namespace WebCalc
