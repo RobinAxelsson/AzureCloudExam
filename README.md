@@ -65,12 +65,27 @@
 ```
 # Github PipeLine
 ![pipeline](./img/pipeline.png)
+# WebCalc Production Test
+![webcalctest](./img/webcalctest.png)
 
-## Production test web app
 ![prod-test](./img/prod-test.png)
+# Functions Production test
+```yaml
+production-test-add-calculator:
+    runs-on: ubuntu-latest
+    needs: deploy-calculators
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+    
+      - name: 'Run add function GET-tests'
+        run: |
+          cd src/CalculatorTest
+          bash curltests.sh '${{ secrets.ADDITIONENDPOINT }}' add
+```
 
-## Production test functions
 ![calc-testadd](./img/calc-testadd.png)
+
 ![calc-testsub](./img/calc-testsub.png)
 
 # Notation
@@ -85,4 +100,34 @@ It is a requirement in the description to have one add azure function App and on
 string Operation = Environment.GetEnvironmentVariable("Operation");
 bool isAdd = Operation == "ADDITION" ? true :
 Operation == "SUBTRACTION" ? false : throw new ArgumentException("Input variables are incorrect", Operation);
+```
+
+## Bash local-dev scripts
+```shell
+.
+├── AddFunction.sh              # runs local add function
+├── CalculatorTest-Public.sh    # runs test againts public enpoints
+├── SubFunction.sh              # runs local sub function (special-special)
+├── WebCalc-Public.sh           # runs web app against public endpoints
+├── WebCalc.sh                  # runs web app against local endpoints (functions)
+├── WebCalcTest-Public.sh       # runs web app test against public enpoints
+└── secrets
+    ├── accountEndpoint.secret  # secrets are needed to run the public scripts
+    ├── addEndpoint.secret
+    └── subEndpoint.secret
+
+### Note I also used dotnet user-secrets to add variables in addition to the .gitignored .secrets files.
+
+dotnet user-secrets init
+dotnet user-secrets set "key" "val"
+dotnet user-secrets list
+dotnet user-secrets remove "key"
+dotnet user-secrets clear
+```
+# Bonus Scripts
+```shell
+.
+├── acp-remotes.sh     # Adds commits and pushes all changes two in-script specified remotes
+├── kill-backend.sh    # Finds the dotnet run and dotnet exec and kill the process if error
+└─── paste.sh          # MacOS pngpaste command to efficiently add images to the readme.
 ```
