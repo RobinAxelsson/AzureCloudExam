@@ -14,7 +14,6 @@ namespace WebCalc
             Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
-        private ILogger _logger;
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();

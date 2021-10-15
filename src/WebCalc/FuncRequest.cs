@@ -11,15 +11,12 @@ namespace WebCalc
 {
     public class FuncRequest
     {
-        public FuncRequest(IConfiguration configuration, ILogger<FuncRequest> logger)
+        public FuncRequest(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
         }
         private IConfiguration _configuration;
-        private readonly ILogger<FuncRequest> _logger;
-
-        public async Task<String> Request(string a, string b, string op)
+        public async Task<String> RequestAsync(string a, string b, string op)
         {
             string endpoint = Operation.ADDITION == op ? _configuration["AdditionEndpoint"] : _configuration["SubtractionEndpoint"];
             var uriBuilder = new UriBuilder(endpoint);
@@ -30,7 +27,6 @@ namespace WebCalc
             parameters["b"] = b;
             uriBuilder.Query = parameters.ToString();
 
-            Console.WriteLine(uriBuilder.Uri);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriBuilder.ToString());
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
@@ -45,8 +41,7 @@ namespace WebCalc
             }
             catch (System.Exception ex)
             {
-                _logger.LogError(ex, "Http request threw, tried to calculate", new object[] { a, b });
-                return null;
+                throw new System.Exception($"Error FuncRequest class: requesting function calculations with endpoint: {uriBuilder.ToString()}, a: {a}, b: {b}", ex);
             }
         }
     }

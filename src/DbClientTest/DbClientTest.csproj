@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.21.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebCalc\WebCalc.csproj" />
+  </ItemGroup>
+
 </Project>

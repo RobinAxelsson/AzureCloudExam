@@ -11,20 +11,17 @@ namespace WebCalc
     public class DbClient
     {
         private static int counter = 0;
-        private ILogger _logger;
         private Database _database;
         private Container _container;
         private CosmosClient _cosmosClient;
         private IConfiguration _configuration;
         private string _containerName;
         private string _dbName;
-        public DbClient(ILogger<DbClient> logger, IConfiguration configuration)
+        public DbClient(IConfiguration configuration)
         {
             _configuration = configuration;
             _cosmosClient = new CosmosClient(_configuration["accountEndpoint"], _configuration["accountKey"]);
             counter++;
-            _logger = logger;
-            logger.LogInformation($"DbClient number {counter} was instantiated");
 
             _dbName = _configuration["CalcDbName"];
             _containerName = _configuration["CalcContainer"];
@@ -42,7 +39,7 @@ namespace WebCalc
         /// <param name="calculation"></param>
         /// <returns>Returns true if it was added, false if it wasn't.</returns>
 
-        public async Task TryAddCalculation(Calculation calculation)
+        public async Task AddCalculationAsync(Calculation calculation)
         {
             await InitDbEnvironment();
             await _container.CreateItemAsync<Calculation>(calculation, new PartitionKey(calculation.Operation));
@@ -51,7 +48,7 @@ namespace WebCalc
         /// <summary>
         /// Runs a query (using Azure Cosmos DB SQL syntax) against the container "all" and retrieves all calculations.
         /// </summary>
-        public async Task<List<Calculation>> GetLast10Async()
+        public async Task<List<Calculation>> GetTop10Async()
         {
             await InitDbEnvironment();
             QueryDefinition queryDefinition = new QueryDefinition("SELECT * FROM all d ORDER BY d._ts DESC OFFSET 0 LIMIT 10");

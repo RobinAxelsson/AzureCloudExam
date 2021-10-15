@@ -5,5 +5,4 @@ export accountEndpoint
 accountKey=$(cat local-dev/secrets/accountKey.secret)
 export accountKey
 
-cd src/WebTest
-dotnet run -- 666+0=666 ADDITION
+dotnet src/DbClientTest/bin/Debug/netcoreapp3.1/publish/DbClientTest.dll accountKey=$accountKey accountEndpoint=$accountEndpoint
