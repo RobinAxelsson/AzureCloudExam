@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WebCalc
 {
@@ -20,6 +19,7 @@ namespace WebCalc
             services.AddScoped<FuncRequest>();
             services.AddSingleton<DbClient>();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddApplicationInsightsTelemetry();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
