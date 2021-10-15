@@ -43,6 +43,8 @@ namespace WebCalcTest
             await funcRequest.RequestAsync("10", "-5", Operation.SUBTRACTION);
 
             await funcRequest.RequestAsync("10", "-5", Operation.ADDITION);
+
+            Console.WriteLine("End of WebCalcTest, No exception was thrown!");
         }
     }
 }
