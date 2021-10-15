@@ -1,23 +1,39 @@
 # Mini Calculator - Cloud Exam
-## Two Remotes
-In this project I have pushed to two remotes as a quick fix to be able to deploy to Azure with GitHub Actions.
-[Action Repo Link](https://github.com/RobinAxelsson/MolnTentaDeploy)
-
-## Two Azure Functions - Same Source
-It is a requirement in the description to have one add azure function App and one sub azure function App and to do this efficiently I use the same source code but use a configuration variable to switch between the two operations. Therefor the same code can be deployed to two different Azure Functions App. [Source Link HttpTrigger.cs](https://github.com/PGBSNH20/moln-tenta-RobinAxelsson/blob/main/src/Calculator/HttpTrigger.cs)
-
-```csharp
-string Operation = Environment.GetEnvironmentVariable("Operation");
-bool isAdd = Operation == "ADDITION" ? true :
-Operation == "SUBTRACTION" ? false : throw new ArgumentException("Input variables are incorrect", Operation);
-```
-## App Insights Overview
-![overview](./img/overview.png)
-
-## Front End
 ![frontend](./img/frontend.png)
 
-## Back End
+# Directory tree without noise
+```shell
+.
+└── src
+    ├── Calculator
+    │   ├── Calculator.csproj
+    │   ├── HttpTrigger.cs
+    │   └── host.json
+    ├── CalculatorTest
+    │   └── curltests.sh
+    ├── WebCalc
+    │   ├── Calculation.cs
+    │   ├── DbClient.cs
+    │   ├── FuncRequest.cs
+    │   ├── Operation.cs
+    │   ├── Pages
+    │   │   ├── Index.cshtml
+    │   │   └─── Index.cshtml.cs
+    │   ├── Program.cs
+    │   ├── Startup.cs
+    │   ├── WebCalc.csproj
+    │   ├── appsettings.Development.json
+    │   ├── appsettings.json
+    │   ├── secrets.sh
+    │   └── wwwroot
+    └── WebCalcTest
+        ├── Program.cs
+        └── WebCalcTest.csproj
+
+```
+# App Overview
+![overview](./img/overview.png)
+# Back End
 
 ```shell
 2021-10-15T09:54:57.939511144Z: [INFO]  [40m[32minfo[39m[22m[49m: WebCalc.Pages.IndexModel[0]
@@ -47,15 +63,26 @@ Operation == "SUBTRACTION" ? false : throw new ArgumentException("Input variable
 2021-10-15T09:25:05.615820231Z: [INFO]  [40m[32minfo[39m[22m[49m: WebCalc.Pages.IndexModel[0]
 2021-10-15T09:25:05.615864431Z: [INFO]        POSTED:a=88 b=88 op=ADDITION
 ```
-
-## Github PipeLine
+# Github PipeLine
 ![pipeline](./img/pipeline.png)
 
-### Production test web app
+## Production test web app
 ![prod-test](./img/prod-test.png)
 
-### Production test functions
+## Production test functions
 ![calc-testadd](./img/calc-testadd.png)
 ![calc-testsub](./img/calc-testsub.png)
 
-## Production test overview
+# Notation
+## Two Remotes
+In this project I have pushed to two remotes as a quick fix to be able to deploy to Azure with GitHub Actions.
+[Action Repo Link](https://github.com/RobinAxelsson/MolnTentaDeploy)
+
+## Two Azure Functions - Same Source
+It is a requirement in the description to have one add azure function App and one sub azure function App and to do this efficiently I use the same source code but use a configuration variable to switch between the two operations. Therefor the same code can be deployed to two different Azure Functions App. [Source Link HttpTrigger.cs](https://github.com/PGBSNH20/moln-tenta-RobinAxelsson/blob/main/src/Calculator/HttpTrigger.cs)
+
+```csharp
+string Operation = Environment.GetEnvironmentVariable("Operation");
+bool isAdd = Operation == "ADDITION" ? true :
+Operation == "SUBTRACTION" ? false : throw new ArgumentException("Input variables are incorrect", Operation);
+```
