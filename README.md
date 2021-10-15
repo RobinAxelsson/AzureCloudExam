@@ -3,8 +3,6 @@
 In this project I have pushed to two remotes as a quick fix to be able to deploy to Azure with GitHub Actions.
 [Action Repo Link](https://github.com/RobinAxelsson/MolnTentaDeploy)
 
-
-
 ## Two Azure Functions - Same Source
 It is a requirement in the description to have one add azure function App and one sub azure function App and to do this efficiently I use the same source code but use a configuration variable to switch between the two operations. Therefor the same code can be deployed to two different Azure Functions App. [Source Link HttpTrigger.cs](https://github.com/PGBSNH20/moln-tenta-RobinAxelsson/blob/main/src/Calculator/HttpTrigger.cs)
 
@@ -15,6 +13,7 @@ Operation == "SUBTRACTION" ? false : throw new ArgumentException("Input variable
 ```
 ## App Insights Overview
 ![overview](./img/overview.png)
+
 ## Front End
 ![frontend](./img/frontend.png)
 
