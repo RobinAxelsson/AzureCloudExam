@@ -70,6 +70,8 @@
 
 ![prod-test](./img/prod-test.png)
 # Functions Production test
+[src/CalculatorTest/curltests.sh](https://github.com/PGBSNH20/moln-tenta-RobinAxelsson/blob/main/src/CalculatorTest/curltests.sh)
+
 ```yaml
 production-test-add-calculator:
     runs-on: ubuntu-latest
