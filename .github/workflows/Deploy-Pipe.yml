@@ -108,6 +108,7 @@ jobs:
     
       - name: 'Run add function GET-tests'
         run: |
+          cd src/CalculatorTest
           bash curltests.sh '${{ secrets.ADDITIONENDPOINT }}' add
   
   production-test-sub-calculator:
@@ -119,4 +120,5 @@ jobs:
     
       - name: 'Run add function GET-tests'
         run: |
+          cd src/CalculatorTest
           bash curltests.sh '${{ secrets.SUBTRACTIONENDPOINT }}' sub

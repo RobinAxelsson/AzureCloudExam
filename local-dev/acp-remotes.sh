@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# This script add-commit-pushes to two git remotes for faster GitHub-Action  debugging.
+
 # First add remote
 # git remote add tentadeploy https://github.com/RobinAxelsson/MolnTentaDeploy.git
 # Consider to pull
