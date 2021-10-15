@@ -98,3 +98,25 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.CALC_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CDA710F4BB524EAC914DEDC66F732837 }}
+
+  production-test-add-calculator:
+    runs-on: ubuntu-latest
+    needs: deploy-calculators
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+    
+      - name: 'Run add function GET-tests'
+        run: |
+          bash curltests.sh '${{ secrets.ADDITIONENDPOINT }}' add
+  
+  production-test-sub-calculator:
+    runs-on: ubuntu-latest
+    needs: deploy-calculators
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+    
+      - name: 'Run add function GET-tests'
+        run: |
+          bash curltests.sh '${{ secrets.SUBTRACTIONENDPOINT }}' sub
