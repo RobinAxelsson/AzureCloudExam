@@ -26,6 +26,14 @@ namespace DbClientTest
             };
 
             await dbClient.AddCalculationAsync(calculation);
+
+            configuration["AdditionEndpoint"] = configuration["ADDITIONENDPOINT"];
+            configuration["SubtractionEndpoint"] = configuration["SUBTRACTIONENDPOINT"];
+            var funcRequest = new FuncRequest(configuration);
+
+            var answer = await funcRequest.RequestAsync("10", "-5", Operation.SUBTRACTION);
+
+            if (answer != "15") throw new Exception("The answer is 15 not: " + answer);
         }
     }
 }
