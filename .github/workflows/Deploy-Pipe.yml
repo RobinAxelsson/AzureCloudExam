@@ -15,8 +15,6 @@ env:
   WEBAPP_PATH: 'src/WebCalc'
   CALC_PATH: 'src/Calculator'
   DBCLIENT_PATH: 'src/DbClientTest'
-  ADDITIONENDPOINT: ${{ secrets.ADDITIONENDPOINT }}
-  SUBTRACTIONENDPOINT: ${{ secrets.SUBTRACTIONENDPOINT }}
 jobs:
 
 ########### WEBAPP ############
@@ -94,7 +92,7 @@ jobs:
           dotnet publish -c Release -o myapp
 
       - name: Run test app
-        run: dotnet ${{ env.DBCLIENT_PATH }}/myapp/DbClientTest.dll ${{ secrets.ACCOUNTKEY }} ${{ secrets.ACCOUNTENDPOINT }}
+        run: dotnet ${{ env.DBCLIENT_PATH }}/myapp/DbClientTest.dll ${{ secrets.ACCOUNTKEY }} ${{ secrets.ACCOUNTENDPOINT }} ${{ secrets.CMD_ADDITIONENDPOINT }} ${{ secrets.CMD_SUBTRACTIONENDPOINT }}
 
 
 ############ FUNCTION APPS BUILD DEPLOY ################
