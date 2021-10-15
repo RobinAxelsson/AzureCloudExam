@@ -16,6 +16,10 @@
 
 ![mock](./mockup.png)
 
+## App Insights
+
+![insights](./app-insights.png)
+
 ```shell
 git remote add upstream https://github.com/RobinAxelsson/MolnTentaDeploy.git
 ```

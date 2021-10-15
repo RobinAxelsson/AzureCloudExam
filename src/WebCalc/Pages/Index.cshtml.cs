@@ -42,7 +42,7 @@ namespace WebCalc.Pages
 
             if (response == null) return Page();
 
-            string calcString = $"{a}+{b}={response}";
+            string calcString = $"{a}{Operation.ToPlusOrMinus(op)}{b}={response}";
 
             var calculation = new Calculation()
             {

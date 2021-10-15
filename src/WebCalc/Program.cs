@@ -8,14 +8,10 @@ namespace WebCalc
     {
         public static void Main(string[] args)
         {
-            IServiceCollection services = null;
-
-            var builder = Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-                .ConfigureServices(s => services = s);
-            var host = builder.Build();
-
-            host.Run();
+                .Build()
+                .Run();
         }
     }
 }
