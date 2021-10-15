@@ -19,7 +19,7 @@ namespace WebCalc
             services.AddScoped<FuncRequest>();
             services.AddSingleton<DbClient>();
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddApplicationInsightsTelemetry();
+            services.AddApplicationInsightsTelemetry(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
