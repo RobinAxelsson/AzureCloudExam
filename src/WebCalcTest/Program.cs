@@ -10,7 +10,7 @@ namespace WebCalcTest
         static async Task Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-            .AddCommandLine(args) //adds accountEnpoint and accountKey
+            .AddCommandLine(args) //adds accountEnpoint, accountKey, SubtractionEndpoint and AdditionEndpoint
             .Build();
 
             configuration["CalcDbName"] = "TestDB-DbClient";
@@ -18,20 +18,31 @@ namespace WebCalcTest
 
             var dbClient = new DbClient(configuration);
 
-            var calculation = new Calculation()
+            var addition = new Calculation()
             {
                 Id = Guid.NewGuid().ToString("N"),
                 CalculationString = "1+1=2",
                 Operation = Operation.ADDITION
             };
 
-            await dbClient.AddCalculationAsync(calculation);
+            await dbClient.AddCalculationAsync(addition);
+
+            var subtraction = new Calculation()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                CalculationString = "1+1=2",
+                Operation = Operation.SUBTRACTION
+            };
+
+            await dbClient.AddCalculationAsync(subtraction);
+
+            var calcs = await dbClient.GetTop10Async();
 
             var funcRequest = new FuncRequest(configuration);
 
-            var answer = await funcRequest.RequestAsync("10", "-5", Operation.SUBTRACTION);
+            await funcRequest.RequestAsync("10", "-5", Operation.SUBTRACTION);
 
-            if (answer != "15") throw new Exception("The answer is 15 not: " + answer);
+            await funcRequest.RequestAsync("10", "-5", Operation.ADDITION);
         }
     }
 }
